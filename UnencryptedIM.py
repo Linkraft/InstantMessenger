@@ -24,7 +24,6 @@ def main():
 def serverSide(PORTNUM):
     # Create the nonblocking TCP/IP socket
     serverSock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    #serverSock.setblocking(0)
 
     # Bind the serverSock to the port
     server_address = ('localhost', PORTNUM)
@@ -63,7 +62,6 @@ def serverSide(PORTNUM):
 def clientSide(HOSTNAME, PORTNUM):
     # Create the nonblocking TCP/IP socket
     clientSock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    # clientSock.setblocking(0)
 
     # Connect the client socket to the server's exposed port
     server_address = (HOSTNAME, PORTNUM)
