@@ -1,5 +1,5 @@
+# Modified by Jordan Smith for CIS4360, Fall 2019
 # Original author: Henry Tan
-# Modified by Kevin Butler
 
 import os
 import sys
@@ -7,7 +7,7 @@ import argparse
 import socket
 import select
 import logging
-import signal #To kill the programs nicely
+import signal # To kill the programs nicely
 import random
 
 from collections import deque
@@ -24,7 +24,6 @@ s = None
 server_s = None
 logger = logging.getLogger('main')
 ###########
-
 
 def parse_arguments():
   parser = argparse.ArgumentParser(description = 'A P2P IM service.')
@@ -65,7 +64,7 @@ def init(crypt):
   logging.basicConfig()
   logger.setLevel(logging.CRITICAL)
   
-  #Catch the kill signal to close the socket gracefully
+  # Catch the kill signal to close the socket gracefully
   signal.signal(signal.SIGINT, sigint_handler)
 
   if args.connect is None and args.server is False:
