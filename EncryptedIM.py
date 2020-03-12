@@ -1,6 +1,5 @@
-#!/usr/bin/python
 # Modified by Jordan Smith for CIS4360, Fall 2019
-#Original Author : Henry Tan
+# Original author: Henry Tan
 
 import os
 import sys
@@ -8,7 +7,7 @@ import argparse
 import socket
 import select
 import logging
-import signal #To kill the programs nicely
+import signal # To kill the programs nicely
 import random
 from collections import deque
 
@@ -24,7 +23,6 @@ s = None
 server_s = None
 logger = logging.getLogger('main')
 ###########
-
 
 def parse_arguments():
   parser = argparse.ArgumentParser(description = 'A P2P IM service.')
@@ -101,7 +99,7 @@ def init():
     global server_s
     server_s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     server_s.bind(('', args.port))
-    server_s.listen(1) #Only one connection at a time
+    server_s.listen(1) # Only one connection at a time
     s, remote_addr = server_s.accept()
     server_s.close()
     logger.debug("Connection received from " + str(remote_addr))
@@ -116,7 +114,7 @@ def main():
   output_buffer = deque()
 
   while s is not None: 
-    #Prevents select from returning the writeable socket when there's nothing to write
+    # Prevents select from returning the writeable socket when there's nothing to write
     if (len(output_buffer) > 0):
       outputs = [s]
     else:
@@ -146,9 +144,9 @@ def main():
 
       # Print the data if the authentication check passes
       if ((data is not None) and (len(data) > 0)):
-        sys.stdout.write(data) #Assuming that stdout is always writeable
+        sys.stdout.write(data) # Assuming that stdout is always writeable
       else:
-        #Socket was closed remotely
+        # Socket was closed remotely
         s.close()
         s = None
 
@@ -157,7 +155,7 @@ def main():
       if(len(data) > 0):
         output_buffer.append(data)
       else:
-        #EOF encountered, close if the local socket output buffer is empty.
+        # EOF encountered, close if the local socket output buffer is empty.
         if( len(output_buffer) == 0):
           s.shutdown(socket.SHUT_RDWR)
           s.close()
@@ -193,7 +191,7 @@ def main():
         myHMAC.update(msg)
         s.send(myHMAC.digest())
 
-        #If not all the characters were sent, put the unsent characters back in the buffer
+        # If not all the characters were sent, put the unsent characters back in the buffer
         if(bytesSent < len(data)):
           output_buffer.appendleft(data[bytesSent:])
 
@@ -202,7 +200,6 @@ def main():
       s.close()
       s = None
 
-###########
 
 if __name__ == "__main__":
   main()
