@@ -9,7 +9,7 @@ Peer-to-peer instant messenger (IM) program I developed for my Computer Informat
 Each branch has a PDF detailing the intended usage of the program. Please refer to them for information on how to use each program.
 
 ## Acknowledgements
-The code for both encrypted programs was built on top of a base provided by my professor, UF's Kevin Butler, and an .
+The code for both encrypted programs was built on top of a base provided by my professor, UF's Kevin Butler.
 
 ## License
 [MIT](https://choosealicense.com/licenses/mit/)
